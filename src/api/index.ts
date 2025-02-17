@@ -11,6 +11,7 @@ import { GeminiHandler } from "./providers/gemini"
 import { OpenAiNativeHandler } from "./providers/openai-native"
 import { ApiStream } from "./transform/stream"
 import { DeepSeekHandler } from "./providers/deepseek"
+import { SFDeepSeekHandler } from "./providers/siliconflow"
 import { RequestyHandler } from "./providers/requesty"
 import { TogetherHandler } from "./providers/together"
 import { QwenHandler } from "./providers/qwen"
@@ -50,6 +51,8 @@ export function buildApiHandler(configuration: ApiConfiguration): ApiHandler {
 			return new OpenAiNativeHandler(options)
 		case "deepseek":
 			return new DeepSeekHandler(options)
+		case "siliconflow":
+			return new SFDeepSeekHandler(options)
 		case "requesty":
 			return new RequestyHandler(options)
 		case "together":

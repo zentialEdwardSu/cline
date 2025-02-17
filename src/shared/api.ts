@@ -15,6 +15,7 @@ export type ApiProvider =
 	| "mistral"
 	| "vscode-lm"
 	| "litellm"
+	| "siliconflow"
 
 export interface ApiHandlerOptions {
 	apiModelId?: string
@@ -56,6 +57,7 @@ export interface ApiHandlerOptions {
 	vsCodeLmModelSelector?: any
 	o3MiniReasoningEffort?: string
 	qwenApiLine?: string
+	siliconflowApiKey?:string
 }
 
 export type ApiConfiguration = ApiHandlerOptions & {
@@ -435,6 +437,33 @@ export const deepSeekModels = {
 		cacheReadsPrice: 0.014,
 	},
 	"deepseek-reasoner": {
+		maxTokens: 8_000,
+		contextWindow: 64_000,
+		supportsImages: false,
+		supportsPromptCache: true, // supports context caching, but not in the way anthropic does it (deepseek reports input tokens and reads/writes in the same usage report) FIXME: we need to show users cache stats how deepseek does it
+		inputPrice: 0, // technically there is no input price, it's all either a cache hit or miss (ApiOptions will not show this)
+		outputPrice: 2.19,
+		cacheWritesPrice: 0.55,
+		cacheReadsPrice: 0.14,
+	},
+} as const satisfies Record<string, ModelInfo>
+
+// SiliconFlowDeepSeek
+// https://cloud.siliconflow.cn/models
+export type SFDeepSeekModelId = keyof typeof sFDeepSeekModels
+export const sFDeepSeekDefaultModelId: SFDeepSeekModelId = "Pro/deepseek-ai/DeepSeek-V3"
+export const sFDeepSeekModels = {
+	"Pro/deepseek-ai/DeepSeek-V3": {
+		maxTokens: 8_000,
+		contextWindow: 64_000,
+		supportsImages: false,
+		supportsPromptCache: true, // supports context caching, but not in the way anthropic does it (deepseek reports input tokens and reads/writes in the same usage report) FIXME: we need to show users cache stats how deepseek does it
+		inputPrice: 0, // technically there is no input price, it's all either a cache hit or miss (ApiOptions will not show this)
+		outputPrice: 0.28,
+		cacheWritesPrice: 0.14,
+		cacheReadsPrice: 0.014,
+	},
+	"Pro/deepseek-ai/DeepSeek-R1": {
 		maxTokens: 8_000,
 		contextWindow: 64_000,
 		supportsImages: false,

@@ -69,6 +69,7 @@ export const ExtensionStateContextProvider: React.FC<{
 							config.geminiApiKey,
 							config.openAiNativeApiKey,
 							config.deepSeekApiKey,
+							config.siliconflowApiKey,
 							config.requestyApiKey,
 							config.togetherApiKey,
 							config.qwenApiKey,

@@ -46,6 +46,7 @@ type SecretKey =
 	| "geminiApiKey"
 	| "openAiNativeApiKey"
 	| "deepSeekApiKey"
+	| "siliconflowApiKey"
 	| "requestyApiKey"
 	| "togetherApiKey"
 	| "qwenApiKey"
@@ -468,6 +469,7 @@ export class ClineProvider implements vscode.WebviewViewProvider {
 								liteLlmModelId,
 								liteLlmApiKey,
 								qwenApiLine,
+								siliconflowApiKey,
 							} = message.apiConfiguration
 							await this.updateGlobalState("apiProvider", apiProvider)
 							await this.updateGlobalState("apiModelId", apiModelId)
@@ -494,6 +496,7 @@ export class ClineProvider implements vscode.WebviewViewProvider {
 							await this.storeSecret("geminiApiKey", geminiApiKey)
 							await this.storeSecret("openAiNativeApiKey", openAiNativeApiKey)
 							await this.storeSecret("deepSeekApiKey", deepSeekApiKey)
+							await this.storeSecret("siliconflowApiKey",siliconflowApiKey)
 							await this.storeSecret("requestyApiKey", requestyApiKey)
 							await this.storeSecret("togetherApiKey", togetherApiKey)
 							await this.storeSecret("qwenApiKey", qwenApiKey)
@@ -1418,6 +1421,7 @@ export class ClineProvider implements vscode.WebviewViewProvider {
 			geminiApiKey,
 			openAiNativeApiKey,
 			deepSeekApiKey,
+			siliconflowApiKey,
 			requestyApiKey,
 			requestyModelId,
 			togetherApiKey,
@@ -1469,6 +1473,7 @@ export class ClineProvider implements vscode.WebviewViewProvider {
 			this.getSecret("geminiApiKey") as Promise<string | undefined>,
 			this.getSecret("openAiNativeApiKey") as Promise<string | undefined>,
 			this.getSecret("deepSeekApiKey") as Promise<string | undefined>,
+			this.getSecret("siliconflowApiKey") as Promise<string | undefined>,
 			this.getSecret("requestyApiKey") as Promise<string | undefined>,
 			this.getGlobalState("requestyModelId") as Promise<string | undefined>,
 			this.getSecret("togetherApiKey") as Promise<string | undefined>,
@@ -1541,6 +1546,7 @@ export class ClineProvider implements vscode.WebviewViewProvider {
 				geminiApiKey,
 				openAiNativeApiKey,
 				deepSeekApiKey,
+				siliconflowApiKey,
 				requestyApiKey,
 				requestyModelId,
 				togetherApiKey,
@@ -1644,6 +1650,7 @@ export class ClineProvider implements vscode.WebviewViewProvider {
 			"geminiApiKey",
 			"openAiNativeApiKey",
 			"deepSeekApiKey",
+			"siliconflowApiKey",
 			"requestyApiKey",
 			"togetherApiKey",
 			"qwenApiKey",

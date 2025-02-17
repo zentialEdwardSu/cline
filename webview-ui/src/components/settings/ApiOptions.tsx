@@ -20,6 +20,8 @@ import {
 	bedrockModels,
 	deepSeekDefaultModelId,
 	deepSeekModels,
+	sFDeepSeekDefaultModelId,
+	sFDeepSeekModels,
 	qwenDefaultModelId,
 	qwenModels,
 	geminiDefaultModelId,
@@ -186,6 +188,7 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 					<VSCodeOption value="vertex">GCP Vertex AI</VSCodeOption>
 					<VSCodeOption value="gemini">Google Gemini</VSCodeOption>
 					<VSCodeOption value="deepseek">DeepSeek</VSCodeOption>
+					<VSCodeOption value="siliconflow">SiliconFlow</VSCodeOption>
 					<VSCodeOption value="mistral">Mistral</VSCodeOption>
 					<VSCodeOption value="openai-native">OpenAI</VSCodeOption>
 					<VSCodeOption value="vscode-lm">VS Code LM API</VSCodeOption>
@@ -280,6 +283,37 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 									fontSize: "inherit",
 								}}>
 								You can get an OpenAI API key by signing up here.
+							</VSCodeLink>
+						)}
+					</p>
+				</div>
+			)}
+
+			{selectedProvider === "siliconflow" && (
+				<div>
+					<VSCodeTextField
+						value={apiConfiguration?.siliconflowApiKey || ""}
+						style={{ width: "100%" }}
+						type="password"
+						onInput={handleInputChange("siliconflowApiKey")}
+						placeholder="Enter API Key...">
+						<span style={{ fontWeight: 500 }}>SiliconFlow API Key</span>
+					</VSCodeTextField>
+					<p
+						style={{
+							fontSize: "12px",
+							marginTop: 3,
+							color: "var(--vscode-descriptionForeground)",
+						}}>
+						This key is stored locally and only used to make API requests from this extension.
+						{!apiConfiguration?.siliconflowApiKey && (
+							<VSCodeLink
+								href="https://cloud.siliconflow.cn/models"
+								style={{
+									display: "inline",
+									fontSize: "inherit",
+								}}>
+								You can get a SiliconFlow API key by signing up here.
 							</VSCodeLink>
 						)}
 					</p>
@@ -1150,6 +1184,7 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 							{selectedProvider === "gemini" && createDropdown(geminiModels)}
 							{selectedProvider === "openai-native" && createDropdown(openAiNativeModels)}
 							{selectedProvider === "deepseek" && createDropdown(deepSeekModels)}
+							{selectedProvider === "siliconflow" && createDropdown(sFDeepSeekModels)}
 							{selectedProvider === "qwen" && createDropdown(qwenModels)}
 							{selectedProvider === "mistral" && createDropdown(mistralModels)}
 						</DropdownContainer>
@@ -1358,6 +1393,8 @@ export function normalizeApiConfiguration(apiConfiguration?: ApiConfiguration): 
 			return getProviderData(openAiNativeModels, openAiNativeDefaultModelId)
 		case "deepseek":
 			return getProviderData(deepSeekModels, deepSeekDefaultModelId)
+		case "siliconflow":
+			return getProviderData(sFDeepSeekModels,sFDeepSeekDefaultModelId)
 		case "qwen":
 			return getProviderData(qwenModels, qwenDefaultModelId)
 		case "mistral":
